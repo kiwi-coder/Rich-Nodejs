@@ -23,6 +23,15 @@ vows.describe('player buy house').addBatch({
 			assert.throws(function(){ player.buyHouse(house);}, Error);
 			assert.equal(player.getMoney(), 1000);
 			assert.isFalse(house.hasOwner());
+	},
+
+	'should receive exception when the house already have an owner': function() {
+			var house = new House(100);
+			var player = new Player(1000);
+
+			house.setOwner(new Player(1000));
+
+			assert.throws(function(){ player.buyHouse(house);}, Error);
 	}
 
 }).export(module);
