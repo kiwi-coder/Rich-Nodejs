@@ -6,72 +6,108 @@ var Player = require('../lib/player.js').Player;
 
 vows.describe('player buy house').addBatch({
 
-	'should be success when player has enough money': function() {
-			var house = new House(100);
-			var player = new Player(1000);
+    'should be success when player has enough money':function () {
+        var house = new House(100);
+        var player = new Player(1000);
 
-			player.buyHouse(house);
+        player.buyHouse(house);
 
-			assert.equal(house.getOwner(), player);
-			assert.equal(player.getMoney(), 900);
-	},
+        assert.equal(house.getOwner(), player);
+        assert.equal(player.getMoney(), 900);
+    },
 
-	'should receive exception when player does not have enough money': function() {
-			var house = new House(10000);
-			var player = new Player(1000);
+    'should receive exception when player does not have enough money':function () {
+        var house = new House(10000);
+        var player = new Player(1000);
 
-			assert.throws(function(){ player.buyHouse(house);}, Error);
-			assert.equal(player.getMoney(), 1000);
-			assert.isFalse(house.hasOwner());
-	},
+        assert.throws(function () {
+            player.buyHouse(house);
+        }, Error);
+        assert.equal(player.getMoney(), 1000);
+        assert.isFalse(house.hasOwner());
+    },
 
-	'should receive exception when the house already have an owner': function() {
-			var house = new House(100);
-			var player = new Player(1000);
+    'should receive exception when the house already have an owner':function () {
+        var house = new House(100);
+        var player = new Player(1000);
 
-			house.setOwner(new Player(1000));
+        house.setOwner(new Player(1000));
 
-			assert.throws(function(){ player.buyHouse(house);}, Error);
-	}
+        assert.throws(function () {
+            player.buyHouse(house);
+        }, Error);
+    }
 
 }).export(module);
 
 vows.describe('player upgrade house').addBatch({
-	'should upgrade plat to cottage when player has enough money': function() {
-			var player = new Player(1000);
-			var house = new House(100);
-			house.setType('plat');
-			
-			player.upgradeHouse(house);
+    'should upgrade plat to cottage when player has enough money':function () {
+        var player = new Player(1000);
+        var house = new House(100);
+        house.setType('plat');
 
-			assert.equal(house.getType(), 'cottage');
-			assert.equal(player.getMoney(), 900);	
-	},
-	'should receive exception when player does not have enough money': function() {
-			var player = new Player(10);
-			var house = new House(100);
-			house.setType('plat');
+        player.upgradeHouse(house);
 
-			assert.throws(function(){ player.upgradeHouse(house);}, Error);		
-	},
-	'should upgrade cottage to villa': function() {
-			var player = new Player(1000);
-			var house = new House(100);
-			house.setType('cottage');
+        assert.equal(house.getType(), 'cottage');
+        assert.equal(player.getMoney(), 900);
+    },
+    'should receive exception when player does not have enough money':function () {
+        var player = new Player(10);
+        var house = new House(100);
+        house.setType('plat');
 
-			player.upgradeHouse(house);
+        assert.throws(function () {
+            player.upgradeHouse(house);
+        }, Error);
+    },
+    'should upgrade cottage to villa':function () {
+        var player = new Player(1000);
+        var house = new House(100);
+        house.setType('cottage');
 
-			assert.equal(house.getType(), 'villa');
-			assert.equal(player.getMoney(), 900);
-	},
-	'should upgrade villa to skyscraper': function() {
-			var player = new Player(1000);
-			var house = new House(100);
-			house.setType('villa');
+        player.upgradeHouse(house);
 
-			player.upgradeHouse(house);
+        assert.equal(house.getType(), 'villa');
+        assert.equal(player.getMoney(), 900);
+    },
+    'should upgrade villa to skyscraper':function () {
+        var player = new Player(1000);
+        var house = new House(100);
+        house.setType('villa');
 
-			assert.equal(house.getType(), 'skyscraper');
-			assert.equal(player.getMoney(), 900);
-	}
+        player.upgradeHouse(house);
+
+        assert.equal(house.getType(), 'skyscraper');
+        assert.equal(player.getMoney(), 900);
+    }
+}).export(module);
+
+vows.describe("visitor pay for toll fee").addBatch({
+    'should return pay for half of the price when the house is plat': function() {
+        var house = new House(100);
+        house.setType("plat");
+
+        assert.equal(house.getToll(), 50);
+    },
+
+    'should return pay for 100 of the price when the house is cottage': function() {
+        var house = new House(100);
+        house.setType("cottage");
+
+        assert.equal(house.getToll(), 100);
+    },
+
+    'should return pay for 200 of the price when the house is villa': function() {
+        var house = new House(100);
+        house.setType("villa");
+
+        assert.equal(house.getToll(), 200);
+    },
+
+    'should return pay for 400 of the price when the house is skyscraper': function() {
+        var house = new House(100);
+        house.setType("skyscraper");
+
+        assert.equal(house.getToll(), 400);
+    }
 }).export(module);
