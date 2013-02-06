@@ -3,6 +3,10 @@ var vows = require('vows'),
 
 var House = require('../lib/house.js').House;
 var Player = require('../lib/player.js').Player;
+var Plat = require('../lib/house-type.js').Plat;
+var Cottage = require('../lib/house-type.js').Cottage;
+var Villa = require('../lib/house-type.js').Villa;
+var Skyscraper = require('../lib/house-type.js').Skyscraper;
 
 vows.describe('player buy house').addBatch({
 
@@ -44,18 +48,18 @@ vows.describe('player upgrade house').addBatch({
     'should upgrade plat to cottage when player has enough money':function () {
         var player = new Player(1000);
         var house = new House(100);
-        house.setType('plat');
+        house.setType(new Plat());
 
         player.upgradeHouse(house);
 
-        assert.equal(house.getType(), 'cottage');
+        assert.instanceOf(house.getType(), Cottage);
         assert.equal(player.getMoney(), 900);
     },
 
     'should receive exception when player does not have enough money':function () {
         var player = new Player(10);
         var house = new House(100);
-        house.setType('plat');
+        house.setType(new Plat());
 
         assert.throws(function () {
             player.upgradeHouse(house);
@@ -65,22 +69,22 @@ vows.describe('player upgrade house').addBatch({
     'should upgrade cottage to villa':function () {
         var player = new Player(1000);
         var house = new House(100);
-        house.setType('cottage');
+        house.setType(new Cottage());
 
         player.upgradeHouse(house);
 
-        assert.equal(house.getType(), 'villa');
+        assert.instanceOf(house.getType(), Villa);
         assert.equal(player.getMoney(), 900);
     },
 
     'should upgrade villa to skyscraper':function () {
         var player = new Player(1000);
         var house = new House(100);
-        house.setType('villa');
+        house.setType(new Villa());
 
         player.upgradeHouse(house);
 
-        assert.equal(house.getType(), 'skyscraper');
+        assert.instanceOf(house.getType(), Skyscraper);
         assert.equal(player.getMoney(), 900);
     }
 }).export(module);
