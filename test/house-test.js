@@ -48,44 +48,22 @@ vows.describe('player upgrade house').addBatch({
     'should upgrade plat to cottage when player has enough money':function () {
         var player = new Player(1000);
         var house = new House(100);
-        house.setType(new Plat());
+        house.setType(Plat);
 
         player.upgradeHouse(house);
 
-        assert.instanceOf(house.getType(), Cottage);
+        assert.equal(house.getType(), Cottage);
         assert.equal(player.getMoney(), 900);
     },
 
     'should receive exception when player does not have enough money':function () {
         var player = new Player(10);
         var house = new House(100);
-        house.setType(new Plat());
+        house.setType(Plat);
 
         assert.throws(function () {
             player.upgradeHouse(house);
         }, Error);
-    },
-
-    'should upgrade cottage to villa':function () {
-        var player = new Player(1000);
-        var house = new House(100);
-        house.setType(new Cottage());
-
-        player.upgradeHouse(house);
-
-        assert.instanceOf(house.getType(), Villa);
-        assert.equal(player.getMoney(), 900);
-    },
-
-    'should upgrade villa to skyscraper':function () {
-        var player = new Player(1000);
-        var house = new House(100);
-        house.setType(new Villa());
-
-        player.upgradeHouse(house);
-
-        assert.instanceOf(house.getType(), Skyscraper);
-        assert.equal(player.getMoney(), 900);
     }
 }).export(module);
 
