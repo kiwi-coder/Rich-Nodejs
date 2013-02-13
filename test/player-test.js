@@ -69,3 +69,25 @@ vows.describe('sell tools').addBatch({
         }, Error);
     }
 }).export(module);
+
+vows.describe('player forward').addBatch({
+    'player forward 3 steps from site 2 to site 5':function () {
+        var player = new Player(0);
+        player.setIndex(2);
+        player.setMapSize(100);
+
+        player.forward(3);
+
+        assert.equal(player.getIndex(), 5);
+    },
+
+    'player forward from 1 step from site 7 to site 0 if map size is 8':function () {
+        var player = new Player(0);
+        player.setIndex(7);
+        player.setMapSize(8);
+
+        player.forward(1);
+
+        assert.equal(player.getIndex(), 0)
+    }
+}).export(module);
