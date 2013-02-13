@@ -5,8 +5,6 @@ var House = require('../lib/house.js').House;
 var Player = require('../lib/player.js').Player;
 var Plat = require('../lib/house-type.js').Plat;
 var Cottage = require('../lib/house-type.js').Cottage;
-var Villa = require('../lib/house-type.js').Villa;
-var Skyscraper = require('../lib/house-type.js').Skyscraper;
 
 vows.describe('player buy house').addBatch({
 

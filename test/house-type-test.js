@@ -76,7 +76,7 @@ vows.describe('house type display').addBatch({
         assert.equal(Villa.display(), '2');
     },
 
-    'should return 3 for skyscraper': function() {
+    'should return 3 for skyscraper':function () {
         assert.equal(Skyscraper.display(), '3');
     }
 }).export(module);
@@ -107,5 +107,23 @@ vows.describe('upgrade').addBatch({
         house.upgrade();
 
         assert.equal(house.getType(), Skyscraper);
+    }
+}).export(module);
+
+vows.describe('can upgrade').addBatch({
+    'plat can upgrade':function () {
+        assert.isTrue(Plat.canUpgrade);
+    },
+
+    'cottage can upgrade':function () {
+        assert.isTrue(Cottage.canUpgrade);
+    },
+
+    'villa can upgrade':function () {
+        assert.isTrue(Villa.canUpgrade);
+    },
+
+    'skyscraper cannot upgrade':function () {
+        assert.isFalse(Skyscraper.canUpgrade);
     }
 }).export(module);
