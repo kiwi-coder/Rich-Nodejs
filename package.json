@@ -4,7 +4,9 @@
   "description": "a nodejs implementation of the game Rich",
   "author": "tw spring homework",
   "dependencies": {
-    "vows": ">= 0.4.0" 	
+    "vows": ">= 0.4.0", 	
+    "commander": ">= 1.1.1",
+    "colors": ">= 0.6.0"
   },
   "engine": "node 0.8.17"
 }

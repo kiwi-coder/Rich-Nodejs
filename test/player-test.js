@@ -5,6 +5,7 @@ var Player = require('../lib/player').Player;
 var BlockTool = require('../lib/tool').BlockTool;
 var RobotTool = require('../lib/tool').RobotTool;
 var BombTool = require('../lib/tool').BombTool;
+var Map = require('../lib/map').Map;
 
 vows.describe('player buy tool').addBatch({
     'player can buy another tool if points is enough':function () {
@@ -74,7 +75,7 @@ vows.describe('player forward').addBatch({
     'player forward 3 steps from site 2 to site 5':function () {
         var player = new Player(0);
         player.setIndex(2);
-        player.setMapSize(100);
+        player.setMap(new Map(100));
 
         player.forward(3);
 
@@ -84,7 +85,7 @@ vows.describe('player forward').addBatch({
     'player forward from 1 step from site 7 to site 0 if map size is 8':function () {
         var player = new Player(0);
         player.setIndex(7);
-        player.setMapSize(8);
+        player.setMap(new Map(8));
 
         player.forward(1);
 
