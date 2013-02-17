@@ -92,3 +92,30 @@ vows.describe('player forward').addBatch({
         assert.equal(player.getIndex(), 0)
     }
 }).export(module);
+
+vows.describe('player display name').addBatch({
+    'should return A for atubo':function () {
+        var player = new Player(0);
+        player.setName("ATuBo");
+
+        assert.equal(player.display(), "A");
+    }
+}).export(module);
+
+vows.describe('select player').addBatch({
+    'should return QianFuRen for select 1':function () {
+        assert.equal(Player.selectPlayer(1).getName(), "QianFuRen");
+    },
+
+    'should return ATuBo for select 2':function () {
+        assert.equal(Player.selectPlayer(2).getName(), "ATuBo");
+    },
+
+    'should return SunXiaoMei for select 3':function () {
+        assert.equal(Player.selectPlayer(3).getName(), "SunXiaoMei");
+    },
+
+    'should return JinBeiBei for select 4':function() {
+        assert.equal(Player.selectPlayer(4).getName(), "JinBeiBei");
+    }
+}).export(module);
