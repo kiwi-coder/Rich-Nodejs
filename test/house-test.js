@@ -85,3 +85,17 @@ vows.describe('player sell house').addBatch({
         }, Error);
     }
 }).export(module);
+
+vows.describe('player pay for toll').addBatch({
+    'should pay for toll':function () {
+        var owner = new Player(1000);
+        var house = new House(100);
+        house.setOwner(owner);
+        var visitor = new Player(1000);
+
+        visitor.payToll(house);
+
+        assert.equal(visitor.getMoney(), 950);
+        assert.equal(owner.getMoney(), 1050);
+    }
+}).export(module);
