@@ -1,7 +1,7 @@
 var vows = require('vows'),
     assert = require('assert'),
     events = require('events');
-var HouseSite = require('../lib/house-site').HouseSite;
+var HouseSiteController = require('../lib/site-controller').HouseSiteController;
 var Player = require('../lib/player').Player;
 var House = require('../lib/house').House;
 
@@ -9,7 +9,7 @@ var House = require('../lib/house').House;
 vows.describe('notices when comes a player stop at this site').addBatch({
     'notice player buy house':function () {
         var player = new Player(10000);
-        var houseSite = new HouseSite(new House(100));
+        var houseSite = new HouseSiteController(new House(100));
 
         var consoleLogCalled = false;
         console.log = function (str) {
@@ -28,7 +28,7 @@ vows.describe('notices when comes a player stop at this site').addBatch({
         };
 
         var player = new Player(10000);
-        var houseSite = new HouseSite(new House(100));
+        var houseSite = new HouseSiteController(new House(100));
 
         console.log = function (str) {
         };
@@ -51,7 +51,7 @@ vows.describe('notices when comes a player stop at this site').addBatch({
         };
 
         var player = new Player(10000);
-        var houseSite = new HouseSite(new House(100));
+        var houseSite = new HouseSiteController(new House(100));
 
         console.log = function (str) {
         };
@@ -73,7 +73,7 @@ vows.describe('player upgrade house').addBatch({
         var owner = new Player(10000);
         const house = new House(100);
         house.setOwner(owner);
-        var houseSite = new HouseSite(house);
+        var houseSite = new HouseSiteController(house);
 
         var consoleLogCalled = false;
         console.log = function (str) {
@@ -94,7 +94,7 @@ vows.describe('player upgrade house').addBatch({
         var owner = new Player(10000);
         const house = new House(100);
         house.setOwner(owner);
-        var houseSite = new HouseSite(house);
+        var houseSite = new HouseSiteController(house);
 
         console.log = function (str) {
         };
