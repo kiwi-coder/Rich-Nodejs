@@ -2,12 +2,7 @@ var vows = require('vows'),
     assert = require('assert');
 
 var Map = require('../lib/map').Map;
-
-function DummySite() {
-    this.display = function () {
-        return '0';
-    }
-}
+var DummySite = require('./dummy-site-controller').DummySiteController;
 
 vows.describe('Map').addBatch({
     'site':{
