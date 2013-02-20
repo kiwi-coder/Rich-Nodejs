@@ -1,11 +1,11 @@
 var vows = require('vows'),
     assert = require('assert');
 
-var MagicSite = require('../lib/magic-site').MagicSite;
+var MagicSiteController = require('../../lib/site-controller').MagicSiteController;
 
 vows.describe('display').addBatch({
     'magic site should display M':function() {
-        var magicSite = new MagicSite();
+        var magicSite = new MagicSiteController();
 
         assert.equal(magicSite.display(), 'M');
     }
