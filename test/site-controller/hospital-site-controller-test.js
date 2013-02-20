@@ -1,10 +1,10 @@
 var vows = require('vows'),
     assert = require('assert');
 
-var HospitalSite = require('../lib/hospital-site').HospitalSite;
+var HospitalSite = require('../../lib/site-controller').HospitalSiteController;
 
-vows.describe('display H').addBatch({
-    'hospital display H':function() {
+vows.describe('Hospital').addBatch({
+    'display':function () {
         var hospitalSite = new HospitalSite();
 
         assert.equal(hospitalSite.display(), 'H');
