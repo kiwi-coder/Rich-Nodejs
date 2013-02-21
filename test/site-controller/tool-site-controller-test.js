@@ -1,9 +1,9 @@
 var vows = require('vows'),
     assert = require('assert');
 
-var ToolSite = require('../lib/tool-site').ToolSite;
-var Player = require('../lib/player').Player;
-var Tool = require('../lib/tool').Tool;
+var ToolSite = require('../../lib/site-controller').ToolSiteController;
+var Player = require('../../lib/player').Player;
+var Tool = require('../../lib/tool').Tool;
 
 vows.describe('display').addBatch({
     'tool site should display T':function () {
