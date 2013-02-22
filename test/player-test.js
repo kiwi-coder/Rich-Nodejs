@@ -75,7 +75,7 @@ vows.describe('player forward').addBatch({
     'player forward 3 steps from site 2 to site 5':function () {
         var player = new Player(0);
         player.setIndex(2);
-        player.setMap(new Map(100));
+        player.setMap(new Map(3, 3));
 
         player.forward(3);
 
@@ -85,7 +85,7 @@ vows.describe('player forward').addBatch({
     'player forward from 1 step from site 7 to site 0 if map size is 8':function () {
         var player = new Player(0);
         player.setIndex(7);
-        player.setMap(new Map(8));
+        player.setMap(new Map(3, 3));
 
         player.forward(1);
 
@@ -115,7 +115,7 @@ vows.describe('select player').addBatch({
         assert.equal(Player.selectPlayer(3).getName(), "SunXiaoMei");
     },
 
-    'should return JinBeiBei for select 4':function() {
+    'should return JinBeiBei for select 4':function () {
         assert.equal(Player.selectPlayer(4).getName(), "JinBeiBei");
     }
 }).export(module);
