@@ -47,7 +47,7 @@ vows.describe('count tools').addBatch({
         for (var i = 1; i <= 3; i++) player.addTool(new RobotTool());
         for (var i = 1; i <= 2; i++) player.addTool(new BombTool());
 
-        assert.equal(player.getSpecificToolCount(new RobotTool()), 3);
+        assert.equal(player.countSpecificTool(new RobotTool()), 3);
     }
 }).export(module);
 

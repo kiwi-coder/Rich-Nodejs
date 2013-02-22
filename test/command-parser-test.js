@@ -3,28 +3,28 @@ var vows = require('vows'),
 
 var parser = require('../lib/command-parser');
 var commandParser = parser.commandParser;
-var RollCommand = parser.RollCommand;
-var SellCommand = parser.SellCommand;
-var QuitCommand = parser.QuitCommand;
-var HelpCommand = parser.HelpCommand;
 
 var dummyPlayer = {};
 var dummyCallback = {};
 
 vows.describe('CommandParser').addBatch({
     'roll':function () {
-        assert.isTrue(commandParser.parse(dummyPlayer, 'roll') instanceof  RollCommand);
+        assert.isTrue(commandParser.parse(dummyPlayer, 'roll') instanceof  parser.RollCommand);
     },
 
     'sell 3':function () {
-        assert.isTrue(commandParser.parse(dummyPlayer, 'sell 3') instanceof SellCommand);
+        assert.isTrue(commandParser.parse(dummyPlayer, 'sell 3') instanceof parser.SellCommand);
     },
 
     'quit':function () {
-        assert.isTrue(commandParser.parse(dummyPlayer, 'quit') instanceof QuitCommand);
+        assert.isTrue(commandParser.parse(dummyPlayer, 'quit') instanceof parser.QuitCommand);
     },
 
+    'roll':function() {
+        assert.isTrue(commandParser.parse(dummyPlayer, 'query') instanceof parser.QueryCommand);
+    }
+
     'should return help for invalid input':function () {
-        assert.isTrue(commandParser.parse(dummyCallback, 'invalid input') instanceof HelpCommand);
+        assert.isTrue(commandParser.parse(dummyCallback, 'invalid input') instanceof parser.HelpCommand);
     }
 }).export(module);
