@@ -3,7 +3,6 @@ var vows = require('vows'),
 
 var Player = require('../../lib/player').Player;
 var MineSiteController = require('../../lib/site-controller').MineSiteController;
-var sinon = require('sinon');
 
 vows.describe('MineSiteController').addBatch({
     'player receive 100 bonus points':function () {
@@ -11,13 +10,9 @@ vows.describe('MineSiteController').addBatch({
         player.setPoints(0);
 
         var mineSite = new MineSiteController(100);
-        var mockCallback = sinon.mock();
-        mockCallback.once();
-
-        mineSite.acceptPlayer(player, mockCallback);
+        mineSite.acceptPlayer(player);
 
         assert.equal(player.getPoints(), 100);
-        mockCallback.verify();
     },
 
     'display $':function () {
