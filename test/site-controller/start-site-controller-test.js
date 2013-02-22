@@ -5,17 +5,6 @@ var StartSiteController = require('../../lib/site-controller').StartSiteControll
 var sinon = require('sinon');
 
 vows.describe('StartSite').addBatch({
-    'should call callback':function () {
-        var startSite = new StartSiteController();
-
-        var dummyPlayer = {};
-        var mockCallback = sinon.mock();
-
-        startSite.acceptPlayer(dummyPlayer, mockCallback);
-
-        mockCallback.verify();
-    },
-
     'should display S':function () {
         var startSite = new StartSiteController();
 
