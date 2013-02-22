@@ -6,6 +6,7 @@ var commandParser = parser.commandParser;
 var RollCommand = parser.RollCommand;
 var SellCommand = parser.SellCommand;
 var QuitCommand = parser.QuitCommand;
+var HelpCommand = parser.HelpCommand;
 
 var dummyPlayer = {};
 var dummyCallback = {};
@@ -19,7 +20,11 @@ vows.describe('CommandParser').addBatch({
         assert.isTrue(commandParser.parse(dummyPlayer, 'sell 3') instanceof SellCommand);
     },
 
-    'quit':function() {
+    'quit':function () {
         assert.isTrue(commandParser.parse(dummyPlayer, 'quit') instanceof QuitCommand);
+    },
+
+    'should return help for invalid input':function () {
+        assert.isTrue(commandParser.parse(dummyCallback, 'invalid input') instanceof HelpCommand);
     }
 }).export(module);
