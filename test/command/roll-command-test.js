@@ -10,11 +10,9 @@ vows.describe('RollCommand').addBatch({
         var player = new Player(0);
 
         var mockPlayer = sinon.mock(player);
-        var dummyCallback = function () {
-        };
-        mockPlayer.expects('roll').once().withArgs(dummyCallback);
+        mockPlayer.expects('roll').once();
 
-        new RollCommand(player, dummyCallback).execute();
+        new RollCommand(player).execute();
 
         mockPlayer.verify();
     }
