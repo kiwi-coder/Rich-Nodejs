@@ -6,7 +6,7 @@ var HouseSiteController = require('../../lib/site-controller').HouseSiteControll
 var Player = require('../../lib/player').Player;
 var House = require('../../lib/house').House;
 var sinon = require('sinon');
-var CLI = require('../../lib/cli').CLI;
+var CLI = require('../../lib/util/cli').CLI;
 
 vows.describe('HouseSiteController').addBatch({
     'handle buy house':{

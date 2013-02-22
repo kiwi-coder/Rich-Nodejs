@@ -1,6 +1,6 @@
 var vows = require('vows'),
     assert = require('assert');
-var dice = require('../lib/dice').dice;
+var dice = require('../../lib/util/dice').dice;
 
 vows.describe('Dice').addBatch({
     'roll':{
