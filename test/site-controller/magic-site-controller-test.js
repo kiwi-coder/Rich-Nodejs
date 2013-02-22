@@ -5,17 +5,6 @@ var MagicSiteController = require('../../lib/site-controller').MagicSiteControll
 var sinon = require('sinon');
 
 vows.describe('MagicSite').addBatch({
-    'should call callback':function () {
-        var magicSite = new MagicSiteController();
-
-        var dummyPlayer = {};
-        var mockCallback = sinon.mock();
-
-        magicSite.acceptPlayer(dummyPlayer, mockCallback);
-
-        mockCallback.verify();
-    },
-
     'should display M':function () {
         var magicSite = new MagicSiteController();
 
