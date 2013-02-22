@@ -9,17 +9,5 @@ vows.describe('HospitalSiteController').addBatch({
         var hospitalSite = new HospitalSite();
 
         assert.equal(hospitalSite.display(), 'H');
-    },
-
-    'call callback':function() {
-        var hospitalSite = new HospitalSite();
-
-        var dummyPlayer = {};
-        var mockCallback = sinon.mock();
-        mockCallback.once();
-
-        hospitalSite.acceptPlayer(dummyPlayer, mockCallback);
-
-        mockCallback.verify();
     }
 }).export(module);
