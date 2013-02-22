@@ -12,14 +12,14 @@ var dummyCallback = {};
 
 vows.describe('CommandParser').addBatch({
     'roll':function () {
-        assert.isTrue(commandParser.parse(dummyPlayer, 'roll', dummyCallback) instanceof  RollCommand);
+        assert.isTrue(commandParser.parse(dummyPlayer, 'roll') instanceof  RollCommand);
     },
 
     'sell 3':function () {
-        assert.isTrue(commandParser.parse(dummyPlayer, 'sell 3', dummyCallback) instanceof SellCommand);
+        assert.isTrue(commandParser.parse(dummyPlayer, 'sell 3') instanceof SellCommand);
     },
 
     'quit':function() {
-        assert.isTrue(commandParser.parse(dummyPlayer, 'quit', dummyCallback) instanceof QuitCommand);
+        assert.isTrue(commandParser.parse(dummyPlayer, 'quit') instanceof QuitCommand);
     }
 }).export(module);
