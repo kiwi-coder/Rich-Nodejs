@@ -6,112 +6,100 @@ var HouseSiteController = require('../../lib/site-controller').HouseSiteControll
 var Player = require('../../lib/player').Player;
 var House = require('../../lib/house').House;
 var sinon = require('sinon');
-var cli = require('../../lib/cli').cli;
+var CLI = require('../../lib/cli').CLI;
 
 vows.describe('HouseSiteController').addBatch({
-    'handle player buy house':{
-        'notice player buy house':function () {
-            var mock = sinon.mock(cli);
-            mock.expects('questionln').once().withArgs("是否购买该处空地，100元(Y/N)?");
-
-            var player = new Player(10000);
-            var houseSite = new HouseSiteController(new House(100));
-
-            houseSite.handleBuyHouse(player, function () {
-            });
-
-            mock.verify();
-        },
-
+    'handle buy house':{
         'player want to buy house':function () {
             var player = new Player(10000);
             var house = new House(100);
 
-            cli.questionln = function (message, cb) {
-                cb('Y');
-            };
+            var cli = new CLI();
+            var cliStub = sinon.stub(cli, "question").withArgs("是否购买该处空地，100元(Y/N)?").returns('Y');
+            var houseSite = new HouseSiteController(house, cli);
 
-            var houseSite = new HouseSiteController(house);
+            var playerMock = sinon.mock(player);
+            playerMock.expects('buyHouse').once().withArgs(house);
 
-            var mock = sinon.mock(player);
-            mock.expects('buyHouse').once().withArgs(house);
+            houseSite.handleBuyHouse(player);
 
-            houseSite.handleBuyHouse(player, function () {
-            });
-
-            mock.verify();
+            playerMock.verify();
+            sinon.assert.calledOnce(cliStub);
         },
 
-
-        'player want to buy house':function () {
+        'player do not to buy house':function () {
             var player = new Player(10000);
             var house = new House(100);
 
-            cli.questionln = function (message, cb) {
-                cb('N');
-            };
+            var cli = new CLI();
+            var cliStub = sinon.stub(cli, "question").withArgs("是否购买该处空地，100元(Y/N)?").returns('N');
+            var houseSite = new HouseSiteController(house, cli);
 
-            var houseSite = new HouseSiteController(house);
+            var playerMock = sinon.mock(player);
+            playerMock.expects('buyHouse').never();
 
-            var mock = sinon.mock(player);
-            mock.expects('buyHouse').never();
+            houseSite.handleBuyHouse(player);
 
-            houseSite.handleBuyHouse(player, function () {
-            });
-
-            mock.verify();
+            playerMock.verify();
+            sinon.assert.calledOnce(cliStub);
         }
     },
 
-    'house with owner':{
-        'notice player upgrade house':function () {
-            var mock = sinon.mock(cli);
-            mock.expects('questionln').once().withArgs("是否升级该处地产，100元(Y/N)?");
-
+    'handle upgrade house':{
+        'player want to upgrade house':function () {
             var owner = new Player(10000);
-            const house = new House(100);
+            var house = new House(100);
             house.setOwner(owner);
-            var houseSite = new HouseSiteController(house);
 
-            houseSite.handleUpgradeHouse(owner, function () {
-            });
+            var cli = new CLI();
+            var cliStub = sinon.stub(cli, "question").withArgs("是否升级该处地产，100元(Y/N)?").returns('Y');
+            var houseSite = new HouseSiteController(house, cli);
 
-            mock.verify();
+            var playerMock = sinon.mock(owner);
+            playerMock.expects('upgradeHouse').once().withArgs(house);
+
+            houseSite.handleUpgradeHouse(owner);
+
+            playerMock.verify();
+            sinon.assert.calledOnce(cliStub);
         },
 
-        'player upgrade house':function () {
+
+        'player do not want to upgrade house':function () {
             var owner = new Player(10000);
-            const house = new House(100);
+            var house = new House(100);
             house.setOwner(owner);
 
-            cli.questionln = function (message, cb) {
-                cb('Y');
-            };
+            var cli = new CLI();
+            var cliStub = sinon.stub(cli, "question").withArgs("是否升级该处地产，100元(Y/N)?").returns('N');
+            var houseSite = new HouseSiteController(house, cli);
 
-            var mock = sinon.mock(owner);
-            mock.expects('upgradeHouse').once().withArgs(house);
+            var playerMock = sinon.mock(owner);
+            playerMock.expects('upgradeHouse').never();
 
-            var houseSite = new HouseSiteController(house);
-            houseSite.handleUpgradeHouse(owner, function () {
-            });
+            houseSite.handleUpgradeHouse(owner);
 
-            mock.verify();
-        },
+            playerMock.verify();
+            sinon.assert.calledOnce(cliStub);
 
-        'comes a visitor':function () {
-            var owner = new Player(1000);
-            const house = new House(100);
+        }
+    },
+
+    'handle pay toll':{
+        'pay owner': function() {
+            var visitor = new Player(10000);
+            var owner = new Player(10000);
+            var house = new House(100);
             house.setOwner(owner);
-            var visitor = new Player();
 
-            var mock = sinon.mock(visitor);
-            mock.expects('payToll').once().withArgs(house);
+            var houseSite = new HouseSiteController(house, {});
 
-            var houseSite = new HouseSiteController(house);
-            houseSite.acceptPlayer(visitor, function () {
-            });
+            var playerMock = sinon.mock(visitor);
+            playerMock.expects('payToll').once().withArgs(house);
 
-            mock.verify();
+            houseSite.handlePayToll(visitor);
+
+            playerMock.verify();
         }
     }
 }).export(module);
